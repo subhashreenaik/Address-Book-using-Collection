@@ -173,14 +173,34 @@ public class AddressBookMain {
 			}
 			System.out.println(addressBook);
 	 }
-	  
-	  
+	 /*
+		 * This method searching all first name from contact 
+		 * where their state name is same
+		 *  
+		 */  
+	 public void search() {
+		  Scanner scan=new Scanner(System.in);
+		  System.out.println("Enter the state name  :");
+		  String state=scan.nextLine();
+		 
+				for (Map.Entry<String, List<PersonInfo>> e : addressBook.entrySet())
+				{
+					for (int i = 0; i < contact.size(); i++) {
+						if(e.getValue().get(i).getState().equals(state) ) {
+							System.out.println(e.getValue().get(i).getFirstName());
+						}
+					}
+				}
+		  }  
 	  
 		  
 	  
 	
-	
+	/*
+     * This is the main method to manipulate all the methods
+	 */
 	public static void main(String[] args) {
+		
 		AddressBookMain address1 = new AddressBookMain();
 		
 		/*
@@ -193,8 +213,11 @@ public class AddressBookMain {
 		 *  to the address book
 		 */
 		address1.editPerson();
-		
-		
+		/*
+		 * Calling this method to search the person's name
+		 * where state name is same
+		 */
+		address1.search();
 		
 	}
 
