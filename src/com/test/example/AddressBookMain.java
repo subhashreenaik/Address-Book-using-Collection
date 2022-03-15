@@ -192,8 +192,25 @@ public class AddressBookMain {
 					}
 				}
 		  }  
-	  
-		  
+	 /*
+		 * This method searching all phone number from multiple address book
+		 * where their state name is same
+		 *  
+		 */
+	 public void getPersonMobileNumber() {
+		  Scanner scan=new Scanner(System.in);
+		  System.out.println("Enter the state name  :");
+		  String state=scan.nextLine();
+		 
+				for (Map.Entry<String, List<PersonInfo>> e : addressBook.entrySet())
+				{
+					for (int i = 0; i < contact.size(); i++) {
+						if(e.getValue().get(i).getState().equals(state) ) {
+							System.out.println("Name of the person : "+e.getValue().get(i).getFirstName()+"   "+"Phone number  "+e.getValue().get(i).getPhoneNo());
+						}
+					}
+				}
+		  }  	  
 	  
 	
 	/*
@@ -218,6 +235,12 @@ public class AddressBookMain {
 		 * where state name is same
 		 */
 		address1.search();
+		
+		/*
+		 * Calling this method to get the person's phone number
+		 * where state name is same
+		 */
+		address1.getPersonMobileNumber();
 		
 	}
 
