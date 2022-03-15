@@ -73,29 +73,33 @@ public class AddressBookMain {
 		
 	}
    
-	 
+	/*
+	  * This method is used to delete the all information of a person of addressbook
+	  *  by name and update the address book
+	  */
 	 public void deletePerson() {
 		 System.out.println("Enter the name of the person you want to delete");
 			Scanner s = new Scanner(System.in);
 			String name = s.nextLine();
 
-			for (int j = 0; j < contact.size(); j++) {
-				PersonInfo p = contact.get(j);
-				if (name.equals(p.getFirstName())) {
-					contact.remove(j);
-					for (PersonInfo gen1 : contact) {
-						System.out.println("Updated information is "+gen1);
-					}
-					System.out.println("Information is deleted");
+			for (int j = 0; j < addressBook.size(); j++) {
+				for (Map.Entry<String, List<PersonInfo>> e : addressBook.entrySet())
+				{
+					for (int i = 0; i < contact.size(); i++) {
+						if(e.getValue().get(i).getFirstName().equals(name)) {
+							e.getValue().remove(i);
+					    System.out.println("Information is deleted");
+					    System.out.println(addressBook);
+					    return;
 				}
-				else {
-					System.out.println("The name is different");
 				}
+			   }
 			}
+			System.out.println("The name is different");
 	 }
 	 /*
 	  * This method is used to edit the all information of a person of addressbook
-	  *  by name and update the addressbook
+	  *  by name and update the address book
 	  */
 	 
 	 public  void editPerson() {
@@ -210,7 +214,34 @@ public class AddressBookMain {
 						}
 					}
 				}
-		  }  	  
+		  }  
+	 /*
+		 * This method searching all name from multiple address book
+		 * where their state name is same and put all value in a Dictionary
+		 *  with key and value pair
+		 *  
+		 */
+	 
+	 public void viewPersonByState() {
+		  
+		 Map<String, ArrayList<String>> dicState = new HashMap<String,ArrayList<String>>();
+		 
+			
+				for (Map.Entry<String, List<PersonInfo>> e : addressBook.entrySet())
+				{
+					ArrayList<String> persons = new ArrayList<String>();
+					for (int i = 0; i < contact.size(); i++) {
+						
+						persons.add(e.getValue().get(i).getFirstName());
+						dicState.put(e.getValue().get(i).getState(),persons);
+						
+						
+					}
+				}
+				System.out.println(dicState);
+				}
+					
+	
 	  
 	
 	/*
@@ -241,6 +272,12 @@ public class AddressBookMain {
 		 * where state name is same
 		 */
 		address1.getPersonMobileNumber();
+		/*
+		 *This method searching all name from multiple address book
+		 * where their state name is same and put all value in a Dictionary
+		 *  with key and value pair
+		 */
+		address1.viewPersonByState();
 		
 	}
 
